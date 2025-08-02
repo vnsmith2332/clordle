@@ -1,38 +1,188 @@
-.App {
+:root {
+  --horizontal-spacing-0-5: 1px;
+  --dark-mode-bg: black;
+  --dark-mode-text: white;
+  --square-border-color: #3a3a3c;
+  --filled-square-border-color: #565758;
+  --absent-square-color: #3a3a3c;
+  --correct-square-color: #538d4e;
+  --present-square-color: #b59f3b;
+  --keyboard-key-bg: #818384;
+}
+
+body {
+  background-color: var(--dark-mode-bg);
+  color: var(--dark-mode-text);
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
   text-align: center;
+  margin-bottom: 20px;
+  font-size: x-large;
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 100vh;
+  width: 100vw;
+}
+
+.game-square {
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--square-border-color);
   color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 225%;
+  font-weight: bold;
+  text-transform: uppercase;
+  
 }
 
-.App-link {
-  color: #61dafb;
+.filled-game-square {
+  border: 2px solid var(--filled-square-border-color);
+  animation: grow-shrink 0.1s ease-in;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.correct {
+  animation: flip 0.7s ease-in-out, color-change-correct 0.7s ease-in-out;
+  animation-delay: var(--flip-animation-delay, 0ms);
+  animation-fill-mode: forwards;
+}
+
+.absent {
+  animation: flip 0.7s ease-in-out, color-change-absent 0.7s ease-in-out;
+  animation-delay: var(--flip-animation-delay, 0ms);
+  animation-fill-mode: forwards;
+}
+
+.present {
+  animation: flip 0.7s ease-in-out, color-change-present 0.7s ease-in-out;
+  animation-delay: var(--flip-animation-delay, 0ms);
+  animation-fill-mode: forwards;
+}
+
+@keyframes color-change-correct {
+  0% {
+    background-color: transparent;
+    border-color: var(--filled-square-border-color);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    background-color: transparent;
+    border-color: var(--filled-square-border-color);
   }
+  51% {
+    background-color: var(--correct-square-color);
+    border-color: var(--correct-square-color);
+  }
+  100% {
+    background-color: var(--correct-square-color);
+    border-color: var(--correct-square-color);
+  }
+}
+
+@keyframes color-change-absent {
+  0% {
+    background-color: transparent;
+    border-color: var(--filled-square-border-color);
+  }
+  50% {
+    background-color: transparent;
+    border-color: var(--filled-square-border-color);
+  }
+  51% {
+    background-color: var(--absent-square-color);
+    border-color: var(--absent-square-color);
+  }
+  100% {
+    background-color: var(--absent-square-color);
+    border-color: var(--absent-square-color);
+  }
+}
+
+@keyframes color-change-present {
+  0% {
+    background-color: transparent;
+    border-color: var(--filled-square-border-color);
+  }
+  50% {
+    background-color: transparent;
+    border-color: var(--filled-square-border-color);
+  }
+  51% {
+    background-color: var(--present-square-color);
+    border-color: var(--present-square-color);
+  }
+  100% {
+    background-color: var(--present-square-color);
+    border-color: var(--present-square-color);
+  }
+}
+
+@keyframes flip {
+  50% {
+    transform: perspective(600px) rotateX(90deg);
+  }
+  100% {
+    transform: perspective(600px) rotateX(0deg);
+  }
+}
+
+@keyframes grow-shrink {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.game-row {
+  display: flex;
+  gap: 5px;
+  padding-bottom: 5px;
+}
+
+.keyboard-key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--keyboard-key-bg);
+  border-radius: 4px;
+  width: 40px;
+  height: 50px;
+  padding: 0;
+  border: 0;
+  margin: 0 calc(var(--horizontal-spacing-0-5)*1.5) 0 0; 
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.keyboard-key-special {
+  width: 75px;
+  color: var(--dark-mode-text);
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  column-gap: 5px;
+  padding-bottom: 8px;
+}
+
+.keyboard {
+  margin-top: 40px;
 }
