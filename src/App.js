@@ -93,7 +93,7 @@ function App() {
       }
       setPlayerGuesses(newPlayerGuesses);
     }
-    if (playerGuesses[currentGuessIdx - 1] !== solution) {
+    if (playerGuesses[currentGuessIdx - 1] !== solution && currentGuessIdx <= 5) {
       window.addEventListener('keydown', handleKeyPress);
     }
     return () => {
